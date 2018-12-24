@@ -7,12 +7,6 @@ Game::Game():
             TITLE_OF_MAIN_WINDOW, sf::Style::Close)
 {
     createAssets();
-
-    if(buf.loadFromFile("res/sounds/LineRemoved.wav"))
-    {
-        mSound.setBuffer(buf);
-    }
-
     if(!mFont.loadFromFile("res/fonts/BRLNSR.TTF"))
     {
         std::cout << "Failed to load font" << std::endl;
@@ -90,7 +84,7 @@ void Game::updatePhase(sf::Time frameTime)
         moveCurrentPiece(Direction::RIGHT);
     }
 
-    if(mPiecesSpawned >= 10 * mLevel)
+    if(mPiecesSpawned >= NUM_SPAWNED_PIECES_TO_NEXT_LEVEL * mLevel)
     {
         ++mLevel;
     }
@@ -173,7 +167,6 @@ void Game::lockCurrentPiece()
                 int fy = mCurrentPiece.y + py;
                 mField[fy * FIELD_WIDTH + fx] = LOCKED_BLOCK;
             }
-
         }
     }
 }
@@ -218,7 +211,6 @@ void Game::checkLines()
         bool lineFilled = true;
         for(int fx = 1; fx < FIELD_WIDTH - 1; ++fx)
         {
-            std::cout << mField[fy * FIELD_WIDTH + fx];
             lineFilled &= (mField[fy * FIELD_WIDTH + fx] == LOCKED_BLOCK);
         }
         std::cout << std::endl;
@@ -421,7 +413,6 @@ void Game::createAssets()
     mColors[EMPTY] = sf::Color(0x807962ff);
     mColors[BOUNDARY_BLOCK] = sf::Color(0xb7c2c6ff);
     mColors[LOCKED_BLOCK] = sf::Color::White;
-    mColors[BLOCK_TO_REMOVE] = sf::Color::Yellow;
 
     // I-shape
     mShapes[SHAPE_I].append("..X.");

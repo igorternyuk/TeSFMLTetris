@@ -4,7 +4,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include <string>
 #include <map>
 
@@ -33,10 +32,9 @@ private:
         SHAPE_T = 7,
         LOCKED_BLOCK = 8,
         BOUNDARY_BLOCK = 9,
-        BLOCK_TO_REMOVE = 10,
         BLOCKS_IN_PIECE = 4,
         NUM_SHAPES = 7,
-        NUM_SPAWNED_PIECES_TO_NEXT_LEVEL = 10
+        NUM_SPAWNED_PIECES_TO_NEXT_LEVEL = 20
     };
 
     const int SCORES[BLOCKS_IN_PIECE] = { 100, 300, 500, 1600 };
@@ -73,8 +71,6 @@ private:
     int mPiecesDropped = 0;
     int mScore = 0;
     sf::Font mFont;
-    sf::Sound mSound;
-    sf::SoundBuffer buf;
     void inputPhase();
     void updatePhase(sf::Time frameTime);    
     void initField();
